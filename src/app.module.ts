@@ -5,7 +5,6 @@ import * as Joi from 'joi';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import {
   AppResponseInterceptor,
-  PrismaModule,
 } from '@app/common';
 import { TiktokScrapModule } from './tiktok-scrap/tiktok-scrap.module';
 
@@ -25,7 +24,6 @@ import { TiktokScrapModule } from './tiktok-scrap/tiktok-scrap.module';
         SCRAPER_CACHE_MAX_ENTRIES: Joi.number().required()
       }),
     }),
-    PrismaModule,
     TiktokScrapModule,
   ],
   controllers: [AppController],

@@ -8,7 +8,7 @@ import { CreateTiktokScrapDto } from './dto/create-tiktok-scrap.dto';
 export class TiktokScrapController {
   constructor(private readonly scraper: TiktokScrapService) { }
 
-  @Post('filter/cached')
+  @Post()
   async scrapeFilterCached(
     @Body() dto: CreateTiktokScrapDto
   ) {
@@ -19,6 +19,6 @@ export class TiktokScrapController {
       dto.showVideoOnlyWithMatchKeyword ?? false,
       dto.forceRefresh ?? false
     );
-    return { message: 'OK', data: { keyword: dto.keyword, query: dto.search, fromCache, metrics: fromCache ? null : metrics, items } };
+    return { message: 'Success to scrap data', data: { keyword: dto.keyword, query: dto.search, fromCache, metrics: fromCache ? null : metrics, items } };
   }
 }

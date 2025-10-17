@@ -4,5 +4,4 @@ export * from './interceptor';
 export * from './guard';
 export * from './decorator';
 export * from './type';
-export * from './prisma';
 export * from './helper';
