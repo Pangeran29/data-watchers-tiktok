@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int            @id @unique
+  firstName    String
+  lastName     String?
+  fullName     String
+  username     String
+  languageCode String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  Job          Job[]
+}
+
+model Job {
+  id        Int      @id @unique
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  jobType   JobType
+  message   String
+  sendDate  DateTime
+  isSent    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum JobType {
+  // General / Core
+  INITIATE_CONVERSATION // Mode FRIEND: mulai percakapan, motivasi ringan
+  FOOD_CONSULTATION // Mode FOOD_NUTRITION: tips makan, diet
+  EXERCISE_GUIDE // Mode EXERCISE: saran olahraga & micro-move
+  REMINDING_SLEEP // Mode SLEEP: sleep hygiene & rutinitas tidur
+  // Specific Habits
+  HYDRATION_REMINDING // Mode HYDRATION: tracking minum air
+  STRESS_MINDFULNESS // Mode STRESS: stress relief & mindfulness
+  WORK_LIFESTYLE_ADVICE // Mode WORK_LIFESTYLE: tips sesuai pola kerja
+  // Tracking & Follow-up
+  CHECKUP_MONITORING // Progress report & evaluasi
+  MOTIVATION_STYLE // Atur gaya motivasi (positif, data, challenge)
+}
